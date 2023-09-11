@@ -7,5 +7,6 @@ ssh ec2-user@10.0.2.16 <<EOF
     nvm install v18.12.1
     npm install
     sudo systemctl restart movies
+    systemctl status movies
     exit
 EOF
