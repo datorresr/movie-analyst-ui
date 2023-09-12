@@ -1,5 +1,5 @@
 #!/bin/bash
-ssh -T ec2-user@10.0.2.221 <<EOF
+ssh ec2-user@10.0.2.221 <<EOF
     cd ~/movie-analyst-ui
     git pull origin master
     curl -o-   https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh    | bash
