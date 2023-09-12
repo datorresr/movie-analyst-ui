@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ssh ec2-user@10.0.2.221 <<EOF
     cd ~/movie-analyst-ui
     git pull origin master
