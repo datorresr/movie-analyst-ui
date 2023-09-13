@@ -1,12 +1,30 @@
 #!/bin/bash
-ssh ec2-user@10.0.2.221 <<EOF
+
+# Obtener las direcciones IP de las instancias EC2 del grupo de Auto Scaling
+INSTANCE_IDS=$(aws autoscaling describe-auto-scaling-instances \
+  --region us-east-1 \
+  --output text \
+  --query "AutoScalingInstances[?AutoScalingGroupName=='MoviesFrontEndAutoScaling'].InstanceId")
+
+# Iterar sobre las direcciones IP y ejecutar el script SSH en cada instancia
+for INSTANCE_ID in $INSTANCE_IDS; do
+  PRIVATE_IP=$(aws ec2 describe-instances \
+    --instance-ids $INSTANCE_ID \
+    --region us-east-1 \
+    --query "Reservations[].Instances[].PrivateIpAddress" \
+    --output text)
+
+  echo "Ejecutando script en instancia con IP: $PRIVATE_IP"
+  
+  ssh ec2-user@$PRIVATE_IP <<EOF
     cd ~/movie-analyst-ui
     git pull origin master
-    curl -o-   https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh    | bash
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
     . ~/.nvm/nvm.sh
     nvm install v18.12.1
     npm install
-    sudo systemctl restart movies
-    systemctl status movies
+    systemctl restart movies.service
     exit
-EOF
+  EOF
+
+done
