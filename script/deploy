@@ -26,5 +26,5 @@ for INSTANCE_ID in $INSTANCE_IDS; do
     systemctl restart movies.service
     exit
   EOF
-
 done
+
