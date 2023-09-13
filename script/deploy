@@ -23,7 +23,7 @@ for INSTANCE_ID in $INSTANCE_IDS; do
     . ~/.nvm/nvm.sh
     nvm install v18.12.1
     npm install
-    systemctl restart movies.service
+    sudo systemctl restart movies
 EOF
 
 done
