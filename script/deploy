@@ -24,8 +24,6 @@ for INSTANCE_ID in $INSTANCE_IDS; do
     nvm install v18.12.1
     npm install
     systemctl restart movies.service
-    exit
 EOF
 
 done
-
