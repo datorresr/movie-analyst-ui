@@ -25,6 +25,7 @@ for INSTANCE_ID in $INSTANCE_IDS; do
     npm install
     systemctl restart movies.service
     exit
-  EOF
+EOF
+
 done
 
