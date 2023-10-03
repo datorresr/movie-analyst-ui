@@ -2,9 +2,8 @@
 // This is a test
 var express = require('express');
 var request = require('superagent');
-//var backendHost = process.env.BACK_LB;
+var backendHost = process.env.BACK_HOST;
 //var backendHost = process.env.BACK_HOST || 'internal-MoviesBackEndAutoScaling-1149071104.us-east-1.elb.amazonaws.com';
-var backendHost = 'internal-MoviesLBBackEnd-2004029627.us-east-1.elb.amazonaws.com';
 // Create our express app
 var app = express();
 
