@@ -4,7 +4,7 @@
 INSTANCE_IDS=$(aws autoscaling describe-auto-scaling-instances \
   --region us-east-1 \
   --output text \
-  --query "AutoScalingInstances[?AutoScalingGroupName=='MoviesFrontEndAutoScaling'].InstanceId")
+  --query "AutoScalingInstances[?AutoScalingGroupName=='MoviesFrontEndAS'].InstanceId")
 
 # Iterar sobre las direcciones IP y ejecutar el script SSH en cada instancia
 for INSTANCE_ID in $INSTANCE_IDS; do
@@ -15,7 +15,7 @@ for INSTANCE_ID in $INSTANCE_IDS; do
     --output text)
 
   echo "Ejecutando script en instancia con IP: $PRIVATE_IP"
-  sudo su jenkins
+  
   ssh -o StrictHostKeyChecking=no ec2-user@$PRIVATE_IP <<EOF
     cd ~/movie-analyst-ui
     git pull origin master
