@@ -15,7 +15,7 @@ for INSTANCE_ID in $INSTANCE_IDS; do
     --output text)
 
   echo "Ejecutando script en instancia con IP: $PRIVATE_IP"
-  
+  sudo su jenkins
   ssh -o StrictHostKeyChecking=no ec2-user@$PRIVATE_IP <<EOF
     cd ~/movie-analyst-ui
     git pull origin master
