@@ -3,6 +3,7 @@
 var express = require('express');
 var request = require('superagent');
 var backendHost = process.env.BACK_HOST;
+console.log("El valor de BACK_HOST es:", backendHost);
 // Create our express app
 var app = express();
 
